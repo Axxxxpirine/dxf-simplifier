@@ -94,7 +94,13 @@ def download_file():
     else:
         return jsonify({'error': 'Fichier non trouvé'}), 404
 
+import os
+
+# ... (le reste du code)
+
+# Création des dossiers nécessaires même quand exécuté par gunicorn
+os.makedirs('uploads', exist_ok=True)
+os.makedirs('downloads', exist_ok=True)
+
 if __name__ == '__main__':
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-    os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
     app.run(debug=True)
